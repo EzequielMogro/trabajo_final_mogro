@@ -31,7 +31,7 @@ Para determinar si la ubicación de las mutaciones tiene una relación con el ef
 
 Luego se realizó un test de Chi cuadrado para evaluar la hipótesis, ya que se busca determinar la dependencia de dos variables discretas. Esto que dió como resultado los siguientes valores.
 
-|statistic | pvalue |
+|statistic | p-value |
 |:-------------:|:-------------:|
 |4301.76    |   0.0|
 
@@ -48,9 +48,79 @@ Teniendo en cuenta que se conoce que el plásmido pSymA no cumple una función f
 
 Evaluando estos datos con un test de Chi cuadrado se obtuvieron los siguientes resultados
 
-|statistic | pvalue |
+|statistic | p-value |
 |:-------------:|:-------------:|
 |3796.65    |   0.0|
 
 
 Lo que permite inferir que las inserciones cromosomales tienen una mayor probabilidad de generan mutantes viables con relevancia en la competencia respecto a las localizadas en el plásmido pSymB.
+
+
+## **2. Análisis estadístico de datos continuos**
+
+En este caso se utilizó una tabla con datos de un ensayo de competencia pero a diferencia del ensayo analizado en la sección anterior, realizado con pooles de mutantes, este experimento se realizó inoculando plantas de alfalfa con una mezcla en proporcion 1:1 de uno de los mutantes y la cepa salvaje. Para esto se cuantificó la proporción de mutantes mediante recuento en placa del inóculo (mezcla de entrada) y de las bacterias laxamente asociadas a la raíz 7 días post inoculación (mezcla de salida) en el cual se puede diferenciar la cepa salvaje por la expresión constitutiva de gfp.
+
+|    |   entrada_mut |   entrada_wt |   salida_mut |   salida_wt |
+|---:|--------------:|-------------:|-------------:|------------:|
+|  0 |           128 |          112 |           45 |          82 |
+|  1 |            81 |           61 |           46 |          93 |
+|  2 |            76 |           63 |           61 |         117 |
+|  3 |           105 |          102 |           63 |          81 |
+|  4 |            58 |           49 |           39 |          81 |
+|  5 |           180 |          162 |           50 |         113 |
+|  6 |           109 |          103 |           35 |          72 |
+|  7 |            93 |           81 |           58 |         108 |
+|  8 |            69 |           55 |           63 |         125 |
+
+Para realizar el análisis se calcula la proporción de mutantes en el inóculo y luego del ensayo de competencia:
+
+$$ proporcion\_entrada = {entrada\_mut \over entrada\_mut + entrada\_wt} $$
+
+$$ proporcion\_salida = {salida\_mut \over salida\_mut + salida\_wt} $$
+
+Se grafica la distribución de las proporciones
+
+![](./figuras/distribucion_porporciones_individual.jpg "Frecuencia de distribucion de proporciones en las mezclas de entrada y salida")
+
+Se calculan las medidas características de la distribución:
+
+|                     |   proporcion_entrada |   proporcion_salida |
+|:--------------------|---------------------:|--------------------:|
+| media               |          0.536802    |          0.345424   |
+| mediana             |          0.534483    |          0.335106   |
+| rango               |          0.0631762   |          0.130752   |
+| RI                  |          0.0204468   |          0.0222948  |
+| desviación estandar |          0.0198659   |          0.0373255  |
+| varianza            |          0.000394655 |          0.00139319 |
+| CV                  |          0.0370079   |          0.108057   |
+| skewness            |          0.165462    |          2.17793    |
+| kurtosis            |         -0.313466    |          5.70437    |
+
+Se evalua la homocedasticidad con el test de levene:
+
+|statistic | p-value |
+|:-------------:|:-------------:|
+|0.345   |   0.56|
+
+El resultado del test indica se puede suponer igualdad de varianzas, es decir, se cumple el supuesto de homocedasticidad
+
+Utilizando el test de Shapiro se evalua la normalidad de la distribución de la población.
+||statistic | p-value |
+|:--------|:-------------:|:-------------:|
+|proporcion_entrada|0.996  |   0.987|
+|proporcion_salida|0.760    |   0.007|
+
+Los valores obtenidos para los datos de proporción de salida indican que no sigue una distribución normal por lo que se buscan outliers en este set de datos calculando el z-score para cada valor y con un valor limite de 3. Y al no poder descartar ningún resultado se evalua la diferencia de intercuartilos con el mismo fin y aun así no se puede descartar ningún valor. 
+
+Teniendo esto en cuenta se determina el tamaño muestral necesario asumiendo normalidad, resultando en 699 muestras necesarias para este ensayo.
+
+Dado que operativamente no se puede realizar ese numero de repeticiones, se elige utlizar un test no paramétrico, el test de Kolmogorov-Smirnov para dos muestras
+
+|statistic | p-value |statistic_location|statistic_sign|
+|:--------:|:-------:|:----------------:|:------------:|
+|1.0       |4.11e-05 |0.4375            |-1            |
+
+Con un p-value menor a 0.05 se descarta la hipótesis nula, y se puede asumir que la muestra de entrada y salida son distintas.
+
+En este caso los valores obtenidos en el ensayo tal vez tuvieron un sesgo debido a las condiciones operativas en las que se realizaron las réplicas, lo que probablemente pudo influir en la dispersión de los valores de proporción en la mezcla de salida. Aun con esta dificultad se pudo demostrar una diferencia estadisticamente significativa entre la proporción inicial y final.
+

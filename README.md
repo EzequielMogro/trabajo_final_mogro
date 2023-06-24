@@ -9,18 +9,18 @@ Estos mutantes fueron generados mediante la tecnología de mutagénesis etiqueta
 
 ## **1. Análisis estadístico de datos categóricos**
 
-En este caso se utilizó una tabla que cuenta con resultados de ensayos de competencia por la colonización rizosférica en la que se inocularon macetas de alfalfa con *pooles* de mutantes. Para cada uno de los mutantes (columna 'mutant_ID') se registran dos valores M que hacen referencia a la diferencia en la respresentación de cada una de las dos firmas genéticas (obtenida por secuenciamiento de las dos etiquetas presentes en cada mutante) en la mezcla de mutantes en el inóculo y en la mezcla obtenida al final del ensayo. Cada uno de estos valores M (columnas '7dpiAlfL_KValor M' y '7dpiAlfL_HValor M') está asociado a un p-value (columnas '7dpiAlfL_Kt-test' y '7dpiAlfL_Ht-test') y la columna 'contig' contiene la porcion del genoma en la que está ubicada la inserción del transposon.
+En este caso se utilizó una tabla que cuenta con resultados de ensayos de competencia por la colonización rizosférica en la que se inocularon macetas de alfalfa con *pooles* de mutantes. Para cada uno de los mutantes (columna 'mutant_ID') se registran dos valores M que hacen referencia a la diferencia en la representación de cada una de las dos firmas genéticas (obtenida por secuenciamiento de las dos etiquetas presentes en cada mutante) en la mezcla de mutantes en el inóculo y en la mezcla obtenida al final del ensayo. Cada uno de estos valores M (columnas '7dpiAlfL_KValor M' y '7dpiAlfL_HValor M') está asociado a un p-value (columnas '7dpiAlfL_Kt-test' y '7dpiAlfL_Ht-test') y la columna 'contig' contiene la porción del genoma en la que está ubicada la inserción del transposón.
 
-Con el fin de determinar si exixte una relación entre la ubicación de la mutación (cromosoma(3,65Mpb), plásmidos pSymA(1,35Mpb) o pSymB(1,68Mpb)) y el efecto en la competencia, se clasificaron los mutantes en dos categorías, los afectados negativamente ('negativo'), aquellos que presentaron valores M<-0,7 y un p-value < 0,1 tanto en la firma K como en la firma H (exigencia de consistencia en el resultado observado desde ambas firmas), y 'no_negativo' a aquellos que no cumplen esta condición.
+Con el fin de determinar si existe una relación entre la ubicación de la mutación (cromosoma(3,65Mpb), plásmidos pSymA(1,35Mpb) o pSymB(1,68Mpb)) y el efecto en la competencia, se clasificaron los mutantes en dos categorías, los afectados negativamente ('negativo'), aquellos que presentaron valores M<-0,7 y un p-value < 0,1 tanto en la firma K como en la firma H (exigencia de consistencia en el resultado observado desde ambas firmas), y 'no_negativo' a aquellos que no cumplen esta condición.
 
-Para esto se plantea la hipóstesis nula: No existe una relación entre la ubicación de la mutación en el genoma y el efecto en la competencia de los mutantes. Luego se realiza un test para probar esta hipótesis.
+Para esto se plantea la hipótesis nula: No existe una relación entre la ubicación de la mutación en el genoma y el efecto en la competencia de los mutantes. Luego se realiza un test para probar esta hipótesis.
 
 ### **Frecuencia de distribución de las dos variables (localización y efecto en competencia)**
 \
 ![](./figuras/distribucion_inserciones_genoma.jpg "Frecuencia de distribucion de localización de inserciones en el genoma")
 ![](./figuras/distribucion_mutantes_afectados_negativamente.jpg "Frecuencia de distribucion de condición frente a ensayo de competencia")
 
-Para determinar si la ubicación de las mutaciones tiene una relación con el efecto que genera en la competencia, se realizó una tabla de contingencia en la que se compara el número de mutantes afectado en colonización en relación a la ubicación en el genoma de la inseción del transposón.
+Para determinar si la ubicación de las mutaciones tiene una relación con el efecto que genera en la competencia, se realizó una tabla de contingencia en la que se compara el número de mutantes afectado en colonización en relación a la ubicación en el genoma de la inserción del transposón.
 
 |contig | afectado    |    |
 | ------------- |------------| -----:|
@@ -35,9 +35,9 @@ Luego se realizó un test de Chi cuadrado para evaluar la hipótesis, ya que se 
 |:-------------:|:-------------:|
 |4301.76    |   0.0|
 
-Esto podría indicar un mayor número de genes en el cromosoma que cumplen una función importante en la competencia en relación al número total de genes que pueden ser afectado sin generar una deficiencia vital en el crecimiento de la bacteria.
+Esto podría indicar un mayor número de genes en el cromosoma que cumplen una función importante en la competencia en relación al número total de genes que pueden ser afectados sin generar una deficiencia vital en el crecimiento de la bacteria.
 
-Teniendo en cuenta que se conoce que el plásmido pSymA no cumple una función fundamental en el desarrollo de la simbiosis, la tabla fue filtrada para contemplar solo los mutantes afectados en el cromosoma y en el plámido pSymB.
+Teniendo en cuenta que se conoce que el plásmido pSymA no cumple una función fundamental en el desarrollo de la simbiosis, la tabla fue filtrada para contemplar sólo los mutantes afectados en el cromosoma y en el plásmido pSymB.
 
 |contig | afectado    |    |
 | ------------- |------------| -----:|
@@ -53,12 +53,12 @@ Evaluando estos datos con un test de Chi cuadrado se obtuvieron los siguientes r
 |3796.65    |   0.0|
 
 
-Lo que permite inferir que las inserciones cromosomales tienen una mayor probabilidad de generan mutantes viables con relevancia en la competencia respecto a las localizadas en el plásmido pSymB.
+Lo que permite inferir que las inserciones cromosomales tienen una mayor probabilidad de generar mutantes viables con relevancia en la competencia respecto a las localizadas en el plásmido pSymB.
 
 
 ## **2. Análisis estadístico de datos continuos**
 
-En este caso se utilizó una tabla con datos de un ensayo de competencia pero a diferencia del ensayo analizado en la sección anterior, realizado con pooles de mutantes, este experimento se realizó inoculando plantas de alfalfa con una mezcla en proporcion 1:1 de uno de los mutantes y la cepa salvaje. Para esto se cuantificó la proporción de mutantes mediante recuento en placa del inóculo (mezcla de entrada) y de las bacterias laxamente asociadas a la raíz 7 días post inoculación (mezcla de salida) en el cual se puede diferenciar la cepa salvaje por la expresión constitutiva de gfp.
+En este caso se utilizó una tabla con datos de un ensayo de competencia pero a diferencia del ensayo analizado en la sección anterior, realizado con pooles de mutantes, este experimento se realizó inoculando plantas de alfalfa con una mezcla en proporción 1:1 de uno de los mutantes y la cepa salvaje. Para esto se cuantificó la proporción de mutantes mediante recuento en placa del inóculo (mezcla de entrada) y de las bacterias laxamente asociadas a la raíz 7 días post inoculación (mezcla de salida) en el cual se puede diferenciar la cepa salvaje por la expresión constitutiva de gfp.
 
 |    |   entrada_mut |   entrada_wt |   salida_mut |   salida_wt |
 |---:|--------------:|-------------:|-------------:|------------:|
@@ -96,7 +96,7 @@ Se calculan las medidas características de la distribución:
 | skewness            |          0.165462    |          2.17793    |
 | kurtosis            |         -0.313466    |          5.70437    |
 
-Se evalua la homocedasticidad con el test de levene:
+Se evalúa la homocedasticidad con el test de Levene:
 
 |statistic | p-value |
 |:-------------:|:-------------:|
@@ -110,11 +110,11 @@ Utilizando el test de Shapiro se evalua la normalidad de la distribución de la 
 |proporcion_entrada|0.996  |   0.987|
 |proporcion_salida|0.760    |   0.007|
 
-Los valores obtenidos para los datos de proporción de salida indican que no sigue una distribución normal por lo que se buscan outliers en este set de datos calculando el z-score para cada valor y con un valor limite de 3. Y al no poder descartar ningún resultado se evalua la diferencia de intercuartilos con el mismo fin y aun así no se puede descartar ningún valor. 
+Los valores obtenidos para los datos de proporción de salida indican que no sigue una distribución normal por lo que se buscan outliers en este set de datos calculando el z-score para cada valor y con un valor límite de 3. Y al no poder descartar ningún resultado se evalúa la diferencia de intercuartilos con el mismo fin y aun así no se puede descartar ningún valor. 
 
 Teniendo esto en cuenta se determina el tamaño muestral necesario asumiendo normalidad, resultando en 699 muestras necesarias para este ensayo.
 
-Dado que operativamente no se puede realizar ese numero de repeticiones, se elige utlizar un test no paramétrico, el test de Kolmogorov-Smirnov para dos muestras
+Dado que operativamente no se puede realizar ese número de repeticiones, se elige utilizar un test no paramétrico, el test de Kolmogorov-Smirnov para dos muestras
 
 |statistic | p-value |statistic_location|statistic_sign|
 |:--------:|:-------:|:----------------:|:------------:|
@@ -122,5 +122,18 @@ Dado que operativamente no se puede realizar ese numero de repeticiones, se elig
 
 Con un p-value menor a 0.05 se descarta la hipótesis nula, y se puede asumir que la muestra de entrada y salida son distintas.
 
-En este caso los valores obtenidos en el ensayo tal vez tuvieron un sesgo debido a las condiciones operativas en las que se realizaron las réplicas, lo que probablemente pudo influir en la dispersión de los valores de proporción en la mezcla de salida. Aun con esta dificultad se pudo demostrar una diferencia estadisticamente significativa entre la proporción inicial y final.
+En este caso los valores obtenidos en el ensayo tal vez tuvieron un sesgo debido a las condiciones operativas en las que se realizaron las réplicas, lo que probablemente pudo influir en la dispersión de los valores de proporción en la mezcla de salida. Aun con esta dificultad se pudo demostrar una diferencia estadísticamente significativa entre la proporción inicial y final.
 
+## 3.Regresión lineal
+
+Con el fin de analizar una posible correlación entre la similitud de genomas de cepas de *S. meliloti* y las cantidades de secuencias de inserción diferencialmente ubicadas frente a la cepa de referencia *S. meliloti* 1021 se realizó un análisis de regresión lineal comparando el recuento de IS's y el ANI (*Average Nucleotide Identity*)
+
+![](./figuras/regresion_ani_is.jpg "ANI vs recuento de secuencias de inserción diferencialmente ubicadas")
+
+Para esto se calcula el coeficiente de correlación de Person
+
+|statistic | p-value |
+|:-------------:|:-------------:|
+|-0.154  |   0.47|
+
+El valor negativo de r (-0.154), indica una correlación negativa, lo que se podría interpretar como una mayor presencia de IS's diferenciales cuanto menor sea la similitud de los genomas, aunque la probabilidad que este fenómeno sea explicado por una correlación lineal es de 0.47, siendo este un valor muy bajo.
